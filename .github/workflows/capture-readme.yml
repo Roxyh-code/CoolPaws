@@ -1,0 +1,45 @@
+name: Capture authentic README screenshots
+on:
+  push:
+    branches: [docs/portfolio-readme-20261123]
+    paths:
+      - .github/workflows/capture-readme.yml
+permissions:
+  contents: write
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run CoolPaws frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run dev -- --host 127.0.0.1 > /tmp/coolpaws-vite.log 2>&1 &
+          echo $! > /tmp/coolpaws-vite.pid
+          for i in $(seq 1 45); do if curl -fsS http://127.0.0.1:5173/ >/dev/null; then break; fi; sleep 2; done
+          curl -fI http://127.0.0.1:5173/
+      - name: Capture real browser pages
+        run: |
+          set -e
+          mkdir -p docs/screenshots
+          CHROME=$(command -v google-chrome || command -v chromium || true)
+          echo "Chrome: $CHROME"
+          if [ -z "$CHROME" ]; then echo "Headless Chrome unavailable"; exit 1; fi
+          for route in dashboard find-parks dog-parks; do
+            "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,950 --virtual-time-budget=10000 --screenshot="docs/screenshots/$route.png" "http://127.0.0.1:5173/$route"
+          done
+          file docs/screenshots/*.png
+          ls -lh docs/screenshots
+      - name: Commit screenshots on documentation branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/screenshots/*.png
+          git diff --cached --quiet && exit 0
+          git commit -m "docs: capture real CoolPaws UI screenshots in browser"
+          git push origin HEAD:docs/portfolio-readme-20261123
