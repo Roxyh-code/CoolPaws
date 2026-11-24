@@ -1,8 +1,9 @@
 <div align="center">
-  <img src="docs/assets/coolpaws-cover.svg" alt="CoolPaws — illustrated pet-care dashboard, health reminders and dog park exploration" width="100%" />
   <h1>CoolPaws 🐾</h1>
   <p><strong>Better days for your best friend.</strong></p>
   <p>A pet-care dashboard concept combining everyday wellness, care schedules and places to explore with your dog.</p>
+  <img src="docs/screenshots/find-parks.png" alt="Actual CoolPaws Find Parks page with sidebar, quick-access cards, search and a list of sample parks" width="100%" />
+  <p><small>Actual React app screenshot · Find Parks & Trails · Example data</small></p>
   <p><strong>Independently hand-coded · Pre-AI-assisted development portfolio project</strong></p>
   <p><a href="#features">Explore features</a> · <a href="#run-locally">Run locally</a> · <a href="#architecture">Architecture</a></p>
   <p>
@@ -13,7 +14,7 @@
   </p>
 </div>
 
-> **Portfolio note:** This is an earlier project I built by writing the application code myself, before AI coding assistants became part of my development workflow. The cover above is an **original illustration**, not a captured screenshot. This repository is a historical prototype rather than a production pet-health service.
+> **Portfolio note:** This is an earlier project I built by writing the application code myself, before AI coding assistants became part of my development workflow. The screenshots below were **captured from the original running React app**, not generated mockups. This repository is a historical prototype rather than a production pet-health service.
 
 ---
 
@@ -35,6 +36,17 @@ The goal was also technical: build a multi-page React experience from reusable c
 | **Find parks & trails** | Quick-access activity cards and a searchable directory of sample dog parks with descriptions, ratings and amenities. |
 | **Interactive map** | React Leaflet map with OpenStreetMap tiles, sample markers and park-information popups. |
 | **Navigation system** | React Router routes and a sidebar connecting the implemented dashboard, monitoring, schedules and parks pages. |
+
+### Screenshots from the running app
+
+<table>
+  <tr>
+    <td width="50%" align="center"><img src="docs/screenshots/dashboard.png" alt="Actual CoolPaws wellness and schedule dashboard" width="100%" /><br /><strong>Dashboard</strong><br /><sub>Daily water/activity metrics and an example care schedule.</sub></td>
+    <td width="50%" align="center"><img src="docs/screenshots/dog-parks.png" alt="Actual CoolPaws interactive Leaflet map with two example pins" width="100%" /><br /><strong>Park map</strong><br /><sub>OpenStreetMap tiles, sample markers and React Leaflet.</sub></td>
+  </tr>
+</table>
+
+<small>These are authentic browser screenshots of the current source code. The content is prototype sample data (including sample park coordinates near London), not validated live local pet-care information.</small>
 
 ### The product journey
 
@@ -66,7 +78,7 @@ flowchart LR
   </tr>
 </table>
 
-<small>The icons above are assets already present in the original repository. The cover is a designed illustration of the concept; it should not be interpreted as proof of currently connected real-world data.</small>
+<small>The icons above are assets already present in the original repository. All screen images above are actual browser captures; the data displayed is illustrative and should not be interpreted as verified real-world information.</small>
 
 ## Engineering highlights
 
@@ -159,7 +171,7 @@ CoolPaws/
 │   │   └── assets/
 │   └── package.json
 ├── backend/                       # Historical MongoDB script
-└── docs/assets/                   # README illustration
+└── docs/screenshots/              # Real browser captures of the prototype
 ```
 
 ## What is prototype-only?
